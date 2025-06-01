@@ -1,0 +1,13 @@
+{
+  "name": "gerador-imagem-com-data",
+  "version": "1.0.0",
+  "description": "Site que gera imagens com uma data sobreposta",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^5.0.0"
+  }
+}
