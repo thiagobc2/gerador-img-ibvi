@@ -1,18 +1,25 @@
-const img = new Image();
-img.src = "/imagem-base.jpg"; // imagem na pasta public
-
-const canvas = document.getElementById("canvas");
-const ctx = canvas.getContext("2d");
-
+const imageSelect = document.getElementById("imageSelect");
 const dateInput = document.getElementById("dateInput");
 const generateBtn = document.getElementById("generateBtn");
 const downloadLink = document.getElementById("downloadLink");
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
 
-img.onload = () => {
-  document.fonts.load("68px 'Nanum Gothic'").then(() => {
-    desenharImagem();
-  });
+const images = {
+  domingo: "/imagem-base.jpg",
+  quarta: "/imagem-base-2.jpg",
 };
+
+let img = new Image();
+
+function carregarImagem() {
+  img.src = images[imageSelect.value];
+  img.onload = () => {
+    document.fonts.load("68px 'Nanum Gothic'").then(() => {
+      desenharImagem();
+    });
+  };
+}
 
 function desenharImagem() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -21,14 +28,20 @@ function desenharImagem() {
   const date = dateInput.value;
   if (date) {
     ctx.font = "bold 68px 'Nanum Gothic'";
-    ctx.fillStyle = "#00788B";
+    ctx.fillStyle = imageSelect.value === "domingo" ? "#00788B" : "#008071";
 
-    const text = date;
-    const x = canvas.width - 795;
-    const y = canvas.height - 403;
+    // Definir posição conforme a imagem
+    let x, y;
+    if (imageSelect.value === "domingo") {
+      x = canvas.width - 795;
+      y = canvas.height - 403;
+    } else if (imageSelect.value === "quarta") {
+      x = canvas.width - 760;
+      y = canvas.height - 403;
+    }
 
-    ctx.strokeText(text, x, y);
-    ctx.fillText(text, x, y);
+    ctx.strokeText(date, x, y);
+    ctx.fillText(date, x, y);
   }
 }
 
@@ -40,3 +53,10 @@ generateBtn.addEventListener("click", () => {
   downloadLink.download = "imagem-com-data.jpg";
   downloadLink.textContent = "Baixar Imagem";
 });
+
+imageSelect.addEventListener("change", () => {
+  carregarImagem();
+});
+
+// Inicializa com a imagem de domingo
+carregarImagem();

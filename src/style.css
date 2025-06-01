@@ -46,3 +46,8 @@ button {
   background-color: #013743;
   transform: scale(0.98);
 }
+
+.select {
+  padding: 0 10px;
+  height: 36px;
+}
