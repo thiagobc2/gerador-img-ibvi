@@ -28,7 +28,7 @@ function desenharImagem() {
   const date = dateInput.value;
   if (date) {
     ctx.font = "bold 68px 'Nanum Gothic'";
-    ctx.fillStyle = imageSelect.value === "domingo" ? "#00788B" : "#008071";
+    ctx.fillStyle = imageSelect.value === "domingo" ? "#00788B" : "#fff";
 
     // Definir posição conforme a imagem
     let x, y;
